@@ -9,11 +9,18 @@ namespace Sparky
 {
     internal class CustomerNUnitTests
     {
+        private Customer customer;
+
+        [SetUp]
+        public void Setup()
+        {
+            customer = new Customer(); //global initialization for class
+        }
         [Test]
         public void CombineNames_InputFirstAndLastName_ReturnFullName()
         {
             //Arrange
-            Customer customer = new Customer();
+            //Customer customer = new Customer();
 
             //Act
             customer.CombineNames("Tom", "Hardy");
@@ -31,7 +38,7 @@ namespace Sparky
         public void GreetMessage_NotGreeted_ReturnsNull()
         {
             //Arrange
-            Customer customer = new Customer();
+            //Customer customer = new Customer();
 
             //Act
 
