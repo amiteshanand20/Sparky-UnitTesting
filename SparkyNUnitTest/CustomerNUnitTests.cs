@@ -45,5 +45,16 @@ namespace Sparky
             //Assert
             Assert.That(customer.GreetMessage,Is.Null);
         }
+
+        [Test]
+        public void DiscountCheck_DefaultCustomer_ReturnsDiscountInRange()
+        {
+            //Arrange
+
+            int result = customer.Discount;
+
+            //Assert
+            Assert.That(result,Is.InRange(10, 25));
+        }
     }
 }
