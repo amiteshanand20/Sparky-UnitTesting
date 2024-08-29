@@ -25,12 +25,17 @@ namespace Sparky
             //Act
             customer.CombineNames("Tom", "Hardy");
 
-            //Assert
-            Assert.That( customer.GreetMessage, Is.EqualTo("Hello, Tom Hardy"));
-            Assert.That(customer.GreetMessage, Does.Contain("Tom"));
-            Assert.That(customer.GreetMessage, Does.StartWith("Hello"));
-            Assert.That(customer.GreetMessage, Does.EndWith("Hardy"));
-            Assert.That(customer.GreetMessage, Does.Match("Hello, [A-Z]{1}[a-z]+ [A-Z]{1}[a-z]+"));
+            //Assert 
+            //Multiple method will run other test cases even if one of them fails
+            Assert.Multiple(() =>
+            {
+                Assert.That(customer.GreetMessage, Is.EqualTo("Hello, Tom Hardy"));
+                Assert.That(customer.GreetMessage, Does.Contain("Tom"));
+                Assert.That(customer.GreetMessage, Does.StartWith("Hello"));
+                Assert.That(customer.GreetMessage, Does.EndWith("Hardy"));
+                Assert.That(customer.GreetMessage, Does.Match("Hello, [A-Z]{1}[a-z]+ [A-Z]{1}[a-z]+"));
+            });
+           
             
         }
 
