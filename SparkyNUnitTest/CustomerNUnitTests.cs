@@ -76,6 +76,10 @@ namespace Sparky
             Assert.That(ExceptionDetails.Message, Is.EqualTo("First name is empty"));
             Assert.That(() => customer.CombineNames("", "hanks"), Throws.ArgumentException.With.Message.EqualTo("First name is empty"));
 
+            //check exception is thrown
+            Assert.Throws<ArgumentException>(() => customer.CombineNames("", "hanks"));
+            Assert.That(() => customer.CombineNames("", "hanks"), Throws.ArgumentException);
+
         }
     }
 }
