@@ -81,5 +81,21 @@ namespace Sparky
             Assert.That(() => customer.CombineNames("", "hanks"), Throws.ArgumentException);
 
         }
+
+        [Test]
+        public void CustomerType_CreateCustomerWithLessThan100Orders_ReturnsBasicCustomer()
+        {
+            customer.OrderTotal = 10;
+            var result = customer.GetCustomerDetails();
+            Assert.That(result, Is.TypeOf<BasicCustomer>());
+        } 
+        
+        [Test]
+        public void CustomerType_CreateCustomerWithMoreThan100Orders_ReturnsPlatinumCustomer()
+        {
+            customer.OrderTotal = 110;
+            var result = customer.GetCustomerDetails();
+            Assert.That(result, Is.TypeOf<PlatinumCustomer>());
+        }
     }
 }
