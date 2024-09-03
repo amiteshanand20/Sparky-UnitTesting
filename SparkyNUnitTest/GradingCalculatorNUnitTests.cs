@@ -55,6 +55,7 @@ namespace Sparky
 
             Assert.That(result, Is.EqualTo("B"));
         }
+
         [Test]
         [TestCase(95,55)]
         [TestCase(65,55)]
@@ -66,6 +67,22 @@ namespace Sparky
             string result = gradingCalculator.GetGrade();
 
             Assert.That(result, Is.EqualTo("F"));
+        }  
+        
+        [Test]
+        [TestCase(95,90,ExpectedResult ="A")]
+        [TestCase(85,90,ExpectedResult ="B")]
+        [TestCase(65,90,ExpectedResult ="C")]
+        [TestCase(95,65,ExpectedResult ="B")]
+        [TestCase(95,55,ExpectedResult ="F")]
+        [TestCase(65,55,ExpectedResult ="F")]
+        [TestCase(50,90,ExpectedResult ="F")]
+        public string GetGrade_AllGradeLogicalScenarios_GradeOutput(int score, int attendance)
+        {
+            gradingCalculator.Score = score;
+            gradingCalculator.AttendancePercentage = attendance;
+            return gradingCalculator.GetGrade();
+
         }
 
     }
