@@ -15,7 +15,7 @@ namespace SparkyNUnitTest
         [SetUp]
         public void SetUp()
         {
-            bankAccount = new BankAccount(new LogBook());
+            bankAccount = new BankAccount(new LogFake());
         }
         [Test]
         public void Deposit_Add100_ReturnTrue()

@@ -16,5 +16,11 @@ namespace Sparky
         {
             System.Console.WriteLine(message);
         }
+    } 
+    public  class LogFake :ILogBook
+    {
+        public void Message(string message)
+        {
+        }
     }
 }
