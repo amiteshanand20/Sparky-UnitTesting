@@ -6,14 +6,26 @@ using System.Threading.Tasks;
 
 namespace Sparky
 {
-    public class Customer
+    public interface ICustomer
+    {
+        int OrderTotal { get; set; }
+        int Discount { get; set; }
+        string GreetMessage { get; set; }
+        bool IsPlatinum { get; set; }
+        string CombineNames(string firstName, string lastName);
+        CustomerType GetCustomerDetails();
+
+     }
+    
+    public class Customer :ICustomer
     {
         public int OrderTotal { get; set; }
-        public int Discount = 15;
+        public int Discount { get; set; }
         public string GreetMessage { get; set; }
         public bool IsPlatinum { get; set; }
         public Customer()
         {
+                Discount = 15;
                 IsPlatinum = false;
         }
         public string CombineNames(string firstName, string lastName)
@@ -46,3 +58,4 @@ namespace Sparky
     { 
     }
 }
+

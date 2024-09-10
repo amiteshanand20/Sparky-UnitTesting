@@ -12,7 +12,7 @@ namespace Sparky
         public String Name { get; set; }
         public double Price { get; set; }
 
-        public double GetPrice(Customer customer) 
+        public double GetPrice(ICustomer customer) 
         {
             if (customer.IsPlatinum) 
             {
