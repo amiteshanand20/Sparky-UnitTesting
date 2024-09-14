@@ -42,7 +42,7 @@ namespace SparkyNUnitTest
 
         [Test]
         [TestCase(200,100)]
-        public void Withdraw100With200BalanceAmount(int balance,int withdraw)
+        public void BankWithdraw_Withdraw100With200BalanceAmount_ReturnsTrue(int balance,int withdraw)
         {
             var logMock = new Mock<ILogBook>();
             logMock.Setup(x => x.LogToDB(It.IsAny<string>())).Returns(true);    
@@ -52,6 +52,21 @@ namespace SparkyNUnitTest
             account.Deposit(balance);
             var result = account.Withdraw(withdraw);
             Assert.That(result, Is.True);
+        }
+        
+        [Test]
+        [TestCase(100,200)]
+        public void BankWithdraw_Withdraw200With100BalanceAmount_ReturnsFalse(int balance,int withdraw)
+        {
+            var logMock = new Mock<ILogBook>();
+            logMock.Setup(x => x.LogToDB(It.IsAny<string>())).Returns(true);    
+            logMock.Setup(x => x.LogBalanceAfterWithdrawal(It.Is<int>(x => x > 0))).Returns(true); 
+            logMock.Setup(x => x.LogBalanceAfterWithdrawal(It.IsInRange<int>(int.MinValue,-1,Moq.Range.Inclusive))).Returns(false); 
+
+            BankAccount account = new BankAccount(logMock.Object);
+            account.Deposit(balance);
+            var result = account.Withdraw(withdraw);
+            Assert.That(result, Is.False);
         }
     }
 }
