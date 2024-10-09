@@ -78,6 +78,7 @@ namespace SparkyNUnitTest
 
             Assert.That(logMock.Object.MessageWithReturnStringStr("Hello"), Is.EqualTo(desiredOutput));
         }  
+
         [Test]
         public void BankLogDummy_LogwithOutputString_ReturnTrue()
         {
@@ -87,6 +88,20 @@ namespace SparkyNUnitTest
             string result = "";
             Assert.That(logMock.Object.MessageWithOutputStringStr("Ben", out result));
             Assert.That(result,Is.EqualTo(desiredOutput));
+        }  
+        
+        [Test]
+        public void BankLogDummy_LogRefChecker_ReturnTrue()
+        {
+            var logMock = new Mock<ILogBook>();
+            Customer customer = new();
+            Customer customerNotUsed = new();
+           
+            logMock.Setup(x => x.LogWithRefObj(ref customer)).Returns(true);
+
+            Assert.That(logMock.Object.LogWithRefObj(ref customer),Is.EqualTo(true));
+            Assert.That(logMock.Object.LogWithRefObj(ref customerNotUsed),Is.EqualTo(false));
+           
         }
     }
 }
