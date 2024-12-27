@@ -115,6 +115,20 @@ namespace SparkyNUnitTest
             logMock.Object.LogType = "debug";
             Assert.That(logMock.Object.LogSeverity, Is.EqualTo(20));
             Assert.That(logMock.Object.LogType, Is.EqualTo("debug"));
+
+            //callbacks
+            string logTemp = "Hello,";
+            logMock.Setup(u => u.LogToDB(It.IsAny<string>())).Returns(true).Callback((string str) => logTemp += str);
+            logMock.Object.LogToDB("David");
+            Assert.That(logTemp, Is.EqualTo("Hello,David"));
+
+            //callbacks
+            int counter = 0;
+            logMock.Setup(u => u.LogToDB(It.IsAny<string>())).Returns(true).Callback(() => ++counter);
+            logMock.Object.LogToDB("David");
+            logMock.Object.LogToDB("Tim");
+            Assert.That(counter, Is.EqualTo(2));
+
         }
     }
 }
