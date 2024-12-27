@@ -130,5 +130,21 @@ namespace SparkyNUnitTest
             Assert.That(counter, Is.EqualTo(2));
 
         }
+
+        [Test]
+        public void BankLogDummy_VerifyExample()
+        {
+            var logMock = new Mock<ILogBook>();
+            BankAccount bank = new(logMock.Object);
+            bank.Deposit(100);
+            Assert.That(bank.GetBalance(), Is.EqualTo(100));
+
+            //verification
+            logMock.Verify(u => u.Message(It.IsAny<string>()),Times.Exactly(2));   
+            logMock.Verify(u => u.Message("Test"),Times.Once);
+            logMock.VerifySet(u => u.LogSeverity=101,Times.Once);
+            logMock.VerifyGet(u => u.LogSeverity,Times.Once);
+
+        }
     }
 }
